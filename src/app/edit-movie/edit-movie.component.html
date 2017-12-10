@@ -1,0 +1,52 @@
+<div *ngIf="movie" class="container">
+    <div class="mv-detail-header">
+      <div class="row">
+        <h2 class="movie-title">{{movie.name}}</h2>
+        <p [ngClass]="{red: isAdult, green: !isAdult}">({{movie.mpaaRating.type}}: {{movie.mpaaRating.label}})</p>
+      </div>
+    </div>
+    <div class="mv-detail-body">
+      <div class="row">
+        <div class="small-4 columns">
+          <img class="movie-image" src="{{movie.imgPath}}" />
+        </div>
+        <div class="small-8 columns">
+          <form #movieEditForm="ngForm" (ngSubmit)="onSubmitMovieDetails(movieEditForm.value)">
+              <input [(ngModel)]="movie.imgPath" type="hidden" name="imgPath" #imgPath="ngModel" class="form-control">
+              <input [(ngModel)]="movie.name" type="hidden" name="title" #title="ngModel" class="form-control">
+              <div class="form-group">
+                  <label for="language">Language</label>
+                  <select [(ngModel)]="movie.language" name="language" #language="ngModel" class="form-control">
+                    <option *ngFor="let lang of languages" [value]="lang">{{lang}}</option>
+                </select>
+                </div>
+            <div class="form-group">
+              <label for="audience">Audience</label>
+                  <select [(ngModel)]="movie.mpaaRating.type" name="audience" #audience="ngModel" class="form-control">
+                    <option *ngFor="let au of audiences" [value]="au">{{au}}</option>
+                </select>
+                </div>
+            <div class="form-group">
+              <label for="duration">Duration</label>
+                  <input [(ngModel)]="movie.duration" type="number" name="duration" #duration="ngModel" class="form-control">
+                </div>
+            <div class="form-group">
+                  <label for="userrating">User Rating</label>
+                  <select [(ngModel)]="movie.userRating" class="form-control" name="userrating" #userrating="ngModel">
+                    <option *ngFor="let ur of userratings" [value]="ur">{{ur}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+              <label for="description">Description</label>
+                  <textarea [(ngModel)]="movie.description" name="description" rows="7" type="text"
+                  #description="ngModel" class="form-control text-area"></textarea>
+            </div>
+              <hr>
+              <button (click)="onDeleteMovie()"
+              class="btn right">Delete Movie</button>
+            <button type="submit" class="btn right submit-movie">Update Movie</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

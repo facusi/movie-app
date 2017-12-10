@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row clearfix">
+    <h3>Movies released this week: </h3>
+    <div class="list-view small-3 column" *ngFor="let movie of movies" (click)="onSelectMovie(movie)">
+      <div class="member-item">
+        <div><img src={{movie.imgPath}}></div>
+        <div class="member-name">{{movie.name}}</div>
+        <div class="profile">Rating: {{movie.userRating}}</div>
+      </div>
+    </div>
+  </div>
+</div>
